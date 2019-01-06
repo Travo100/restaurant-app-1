@@ -12,6 +12,7 @@ app.use(express.json());
 
 var routes = require("./controllers/restauarant.js");
 app.use(routes);
+
 db.sequelize.sync({ force: true }).then(function () {
   app.listen(PORT, function () {
     // Log (server-side) when our server has started
