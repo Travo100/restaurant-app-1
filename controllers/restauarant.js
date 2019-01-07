@@ -4,10 +4,10 @@ var router = express.Router();
 
 // var keys = require("./keys.js");
 var yelp = require('yelp-fusion');
-const client = yelp.client(process.env.YELP_API_KEY);
+var client = yelp.client(process.env.YELP_API_KEY);
 require("dotenv").config();
 
-router.get("/search/", function (req, res) {
+router.get("/search", function (req, res) {
 
     db.Favourite.findAll({}).then(function (data) {
         res.json(data);
@@ -15,9 +15,9 @@ router.get("/search/", function (req, res) {
 });
 
 router.post("/search", function (req, res) {
-    var searchlocation = req.body;
+    //var searchlocation = req.body;
         client.search({
-            location: searchlocation
+            location: "San Diego"
         }).then(function (res) {
             console.log(res);
         }).catch(error => {
@@ -25,5 +25,7 @@ router.post("/search", function (req, res) {
         })
 
    
+        
 });
 
+module.exports=router;
