@@ -5,7 +5,6 @@ var router = express.Router();
 // var keys = require("./keys.js");
 var yelp = require('yelp-fusion');
 var client = yelp.client(process.env.YELP_API_KEY);
-require("dotenv").config();
 
 router.get("/search", function (req, res) {
 
@@ -16,13 +15,15 @@ router.get("/search", function (req, res) {
 
 router.post("/search", function (req, res) {
     //var searchlocation = req.body;
-        client.search({
-            location: "San Diego"
-        }).then(function (res) {
-            console.log(res);
-        }).catch(error => {
-            console.log(error);
-        })
+    client.search({
+        location: "San Diego"
+    }).then(function (data) {
+        // change the data in the callback to data instead of res
+        // would be an issue with res being object
+        res.json(data);
+    }).catch(error => {
+        console.log(error);
+    });
 
    
         
